@@ -101,6 +101,7 @@ class PageCanvas extends Vue {
     this.$emit('dragover', event)
   }
   drop(event) {
+    window.console.log(event)
     this.$emit('drop', event)
   }
   dragend(event) {
@@ -108,6 +109,16 @@ class PageCanvas extends Vue {
   }
   mounted() {
     this.bindEvent()
+    this.$nextTick(() => { // 增加使用退格键删除组件
+      document.querySelector('.page-canvas__components').addEventListener('keyup', e => {
+        if(e.code === 'Backspace') {
+          document.querySelector('.page-canvas__components').querySelectorAll('.active').forEach(el => {
+            el.parentNode.removeChild(el)
+          })
+        }
+      })
+    })
+    // window.console.log(111)
   }
   renderChildren(h) {
     let _this = this
@@ -148,7 +159,7 @@ class PageCanvas extends Vue {
   }
   render(h) {
     let layoutStyle = this.$store.state.page.style.layoutStyle;
-    
+
     return <div class="page-canvas" id="pageCanvasContainer">
       <div class="page-canvas__wrap" style={this.wrapStyle} on-drop={($event) => this.drop($event)} on-dragover={($event) => this.dragover($event)} on-dragend={($event) => this.dragend($event)}>
         {layoutStyle === '1' && this.renderChildren()['createVrule'](h)}
