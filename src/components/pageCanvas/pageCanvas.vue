@@ -101,7 +101,6 @@ class PageCanvas extends Vue {
     this.$emit('dragover', event)
   }
   drop(event) {
-    window.console.log(event)
     this.$emit('drop', event)
   }
   dragend(event) {
@@ -110,15 +109,14 @@ class PageCanvas extends Vue {
   mounted() {
     this.bindEvent()
     this.$nextTick(() => { // 增加使用退格键删除组件
-      document.querySelector('.page-canvas__components').addEventListener('keyup', e => {
-        if(e.code === 'Backspace') {
+      window.addEventListener('keyup', e => {
+        if(e.code === 'Backspace' && document.querySelector('.page-layout-view-default').compareDocumentPosition(e.target) === 20) {
           document.querySelector('.page-canvas__components').querySelectorAll('.active').forEach(el => {
             el.parentNode.removeChild(el)
           })
         }
       })
     })
-    // window.console.log(111)
   }
   renderChildren(h) {
     let _this = this
