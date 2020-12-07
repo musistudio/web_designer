@@ -27,7 +27,8 @@ export default class PageEventManage extends Observer {
     if (navigator.platform.match("Mac") ? event.metaKey : event.ctrlKey) {
       eventKeycodeMap[event.keyCode] && this.trigger(['pageEvent', eventKeycodeMap[event.keyCode].toLocaleUpperCase(), 'isCtrl'].join('_'), event);
     } else {
-      eventKeycodeMap[event.keyCode] && this.trigger(['pageEvent', eventKeycodeMap[event.keyCode].toLocaleUpperCase()].join('_'), event);
+      let name = event.key === 'Backspace' ? 'pageEvent_DELETE' : ['pageEvent', eventKeycodeMap[event.keyCode].toLocaleUpperCase()].join('_')
+      name && this.trigger(name, event);
     }
   }
   bindEvent() {

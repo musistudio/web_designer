@@ -108,15 +108,15 @@ class PageCanvas extends Vue {
   }
   mounted() {
     this.bindEvent()
-    this.$nextTick(() => { // 增加使用退格键删除组件
-      window.addEventListener('keyup', e => {
-        if(e.code === 'Backspace' && document.querySelector('.page-layout-view-default').compareDocumentPosition(e.target) === 20) {
-          document.querySelector('.page-canvas__components').querySelectorAll('.active').forEach(el => {
-            el.parentNode.removeChild(el)
-          })
-        }
-      })
-    })
+    // this.$nextTick(() => { // 增加使用退格键删除组件
+    //   window.addEventListener('keyup', e => {
+    //     if(e.code === 'Backspace' && document.querySelector('.page-layout-view-default').compareDocumentPosition(e.target) === 20) {
+    //       document.querySelector('.page-canvas__components').querySelectorAll('.active').forEach(el => {
+    //         el.parentNode.removeChild(el)
+    //       })
+    //     }
+    //   })
+    // })
   }
   renderChildren(h) {
     let _this = this

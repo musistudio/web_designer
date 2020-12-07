@@ -36,7 +36,7 @@ class designerArea extends Vue {
   auxLineY = {}
   auxLineX = {}
   isLockPageEvent = false
-  
+
   bindEvent() {
     this.pageEvent = new PageEventManage()
 
@@ -47,6 +47,7 @@ class designerArea extends Vue {
       .register({ key: 'c', isCtrl: true }, this.copyPluginCallback)
       .register({ key: 'v', isCtrl: true }, this.pastePluginCallback)
 
+
     window.Uidesigner.$event.once('open_code_editor', (data) => {
       this.isLockPageEvent = data
     })
@@ -56,6 +57,7 @@ class designerArea extends Vue {
     this.currentPlugins.length && this.delPluginFn(this.currentPlugins[0].id)
   }
   savePageCallback() {
+    window.console.log(222);
     if (this.isLockPageEvent) return false
   }
   cancelCallback() {

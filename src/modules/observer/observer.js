@@ -1,6 +1,8 @@
 /**
  * 事件订阅，发布
  */
+import ar from "element-ui/src/locale/lang/ar";
+
 export default class Observer {
   constructor() {
     this.event = {};
